@@ -1,0 +1,33 @@
+{
+  "name": "Financial Teal",
+  "dataColors": [
+    "#0E7C86",
+    "#F5A524",
+    "#2BB5BA",
+    "#7A8FA6",
+    "#E4572E",
+    "#145A63",
+    "#F7C873",
+    "#9CCFD2"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#1F2D33",
+  "tableAccent": "#0E7C86",
+  "good": "#0E7C86",
+  "bad": "#E4572E",
+  "neutral": "#F5A524",
+  "textClasses": {
+    "label": {
+      "fontFace": "Segoe UI"
+    },
+    "callout": {
+      "fontFace": "Segoe UI"
+    },
+    "title": {
+      "fontFace": "Segoe UI Semibold"
+    },
+    "header": {
+      "fontFace": "Segoe UI Semibold"
+    }
+  }
+}

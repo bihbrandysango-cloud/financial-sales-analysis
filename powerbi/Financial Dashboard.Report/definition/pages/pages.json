@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.1.0/schema.json",
+  "pageOrder": [
+    "fd_intro",
+    "fd_overview",
+    "fd_countries",
+    "fd_products",
+    "fd_segments",
+    "fd_monthly",
+    "fd_findings",
+    "fd_recs"
+  ],
+  "activePageName": "fd_intro"
+}

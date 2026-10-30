@@ -1,0 +1,535 @@
+table financials
+	lineageTag: 71358ddb-461d-463a-ba4c-6005dff3ebc6
+
+	measure 'Total Sales' = SUM(financials[ Sales])
+		formatString: "$"#,0.0
+		displayFolder: Core
+		lineageTag: 044217fb-a910-4963-98ba-4b9fa7a83b91
+
+	measure 'Total Gross Sales' = SUM(financials[Gross Sales])
+		formatString: "$"#,0.0
+		displayFolder: Core
+		lineageTag: 9f644f52-9f01-4502-be5c-2d7212c06873
+
+	measure 'Total Discounts' = SUM(financials[Discounts])
+		formatString: "$"#,0.0
+		displayFolder: Core
+		lineageTag: aaaa73d1-cef2-4c41-9982-0eb28cb6924b
+
+	measure 'Total COGS' = SUM(financials[COGS])
+		formatString: "$"#,0.0
+		displayFolder: Core
+		lineageTag: b1efe1ce-8cc4-40ea-b7f5-7074a3e95ba7
+
+	measure 'Total Profit' = SUM(financials[Profit])
+		formatString: "$"#,0.0
+		displayFolder: Core
+		lineageTag: 523cfe7a-5c73-4d4a-9fb4-072baccbe585
+
+	measure 'Total Units' = SUM(financials[Units Sold])
+		formatString: #,0.00
+		displayFolder: Core
+		lineageTag: 671336a6-34c9-40d4-b869-cb13c1269df6
+
+	measure 'Total Units (K)' = SUM(financials[Units Sold])
+		formatString: #,0
+		displayFolder: Core
+		lineageTag: 11230aed-6594-4da6-a599-267cceff3827
+
+	measure 'Profit Margin' = DIVIDE([Total Profit], [Total Sales])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Core
+		lineageTag: d0ddf18c-9e71-408b-bb3f-822214bab83b
+
+	measure 'Discount Rate' = DIVIDE([Total Discounts], [Total Gross Sales])
+		formatString: 0.0%
+		displayFolder: Core
+		lineageTag: 697447f8-2be8-41d4-8c08-992044ab72ff
+
+	measure Records = COUNTROWS(financials)
+		formatString: #,0
+		displayFolder: Core
+		lineageTag: 4fdcf628-a32b-46bb-864a-732370db8f73
+
+	measure 'Loss-making Sales' = CALCULATE(COUNTROWS(financials), financials[Profit] < 0)
+		formatString: #,0
+		displayFolder: Core
+		lineageTag: ff42c7a4-b310-43c7-891d-be96bfa50b99
+
+	measure 'Period Label' = COALESCE(SELECTEDVALUE(financials[Month Label]), IF(NOT ISBLANK(SELECTEDVALUE(financials[Year])), "Year " & SELECTEDVALUE(financials[Year]), "Sep 2013 to Dec 2014"))
+		displayFolder: Report Titles
+		lineageTag: 95a49ff1-5d30-4b2c-a21f-5034bb4d21d9
+
+	measure 'Title Profit by Product' = "Profit by Product, " & [Period Label]
+		displayFolder: Report Titles
+		lineageTag: cb2b209d-c452-4922-9023-cccfc944be27
+
+	measure 'Title Units by Product' = "Units Sold by Product, " & [Period Label]
+		displayFolder: Report Titles
+		lineageTag: b030c9a7-0829-44be-a7ab-a73833dba90c
+
+	measure 'Title Sales by Country' = "Sales by Country, " & [Period Label]
+		displayFolder: Report Titles
+		lineageTag: eee8c48c-fa7e-464c-94d3-28518e7abf41
+
+	measure 'Title Margin by Country' = "Profit Margin by Country, " & [Period Label]
+		displayFolder: Report Titles
+		lineageTag: 0aa1cc6b-c7b7-4c43-b96b-89b6682d0502
+
+	measure 'Title Profit by Segment' = "Profit by Segment, " & [Period Label]
+		displayFolder: Report Titles
+		lineageTag: e15dd9f2-9060-415b-aa95-5b4d85b78cb1
+
+	measure 'Title Margin by Segment' = "Profit Margin by Segment, " & [Period Label]
+		displayFolder: Report Titles
+		lineageTag: e7f8e74f-8f12-44d9-9a47-89792c79560b
+
+	measure 'Title Margin by Discount Band' = "Profit Margin by Discount Band, " & [Period Label]
+		displayFolder: Report Titles
+		lineageTag: a1b21598-fb2c-479a-ae17-4d5ecff74f5d
+
+	measure 'Title Losses by Band' = "Loss-making Sales by Discount Band, " & [Period Label]
+		displayFolder: Report Titles
+		lineageTag: 71c5f7a6-1fa5-4aae-9d97-a88238277f49
+
+	measure 'Title Monthly Trend' = "Sales and Profit by Month, " & [Period Label]
+		displayFolder: Report Titles
+		lineageTag: 30653a04-e480-4dbd-b2a1-7801d7521759
+
+	measure 'Title Month Product' = "Sales by Month and Product ($ millions), " & [Period Label]
+		displayFolder: Report Titles
+		lineageTag: 9d3632b6-ed46-478d-9da7-cb3ea798cc73
+
+	measure 'Title Mexico Products' = "Products Sold in Mexico and Their Profit, " & [Period Label]
+		displayFolder: Report Titles
+		lineageTag: 92bffd52-dfee-452a-ac8b-0f22c94a290a
+
+	measure 'Title Product Margin' = "Profit Margin by Product, " & [Period Label]
+		displayFolder: Report Titles
+		lineageTag: 2e6d30a1-aa02-487b-be9f-ef04b11c399d
+
+	measure 'Title Profit Matrix' = "Profit by Product and Segment ($ millions), " & [Period Label]
+		displayFolder: Report Titles
+		lineageTag: 6e3b2f9a-f5b3-479e-8eae-6b09122e3ff4
+
+	measure 'Title Map' = "Sales by Country on the Map, " & [Period Label]
+		displayFolder: Report Titles
+		lineageTag: 034452ef-dded-417d-833e-cafcf72e53e1
+
+	measure 'Sales Sparkline' =
+			VAR _start = CALCULATE ( MIN ( financials[Date] ), ALL ( financials ) )
+			VAR _w = 240
+			VAR _h = 34
+			VAR _months =
+			    ADDCOLUMNS (
+			        GENERATESERIES ( 0, 15, 1 ),
+			        "@v",
+			            VAR _s = EDATE ( _start, [Value] )
+			            RETURN
+			                CALCULATE (
+			                    [Total Sales],
+			                    REMOVEFILTERS ( financials[Date], financials[Year], financials[Month Number], financials[Month Name], financials[Quarter], financials[Month Start], financials[Month Label] ),
+			                    financials[Date] = _s
+			                ) + 0
+			    )
+			VAR _min = MINX ( _months, [@v] )
+			VAR _max = MAXX ( _months, [@v] )
+			VAR _pts =
+			    CONCATENATEX (
+			        _months,
+			        FORMAT ( 4 + [Value] * ( _w - 8 ) / 15, "0" ) & ","
+			            & FORMAT ( _h - 6 - DIVIDE ( [@v] - _min, _max - _min ) * ( _h - 12 ), "0" ),
+			        " ",
+			        [Value], ASC
+			    )
+			VAR _lastY = FORMAT ( _h - 6 - DIVIDE ( MAXX ( FILTER ( _months, [Value] = 15 ), [@v] ) - _min, _max - _min ) * ( _h - 12 ), "0" )
+			RETURN
+			    "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='" & _w & "' height='" & _h & "'>"
+			        & "<polygon points='4," & _h & " " & _pts & " " & ( _w - 4 ) & "," & _h & "' fill='%230E7C86' fill-opacity='0.14'/>"
+			        & "<polyline points='" & _pts & "' fill='none' stroke='%230E7C86' stroke-width='2.5' stroke-linejoin='round' stroke-linecap='round'/>"
+			        & "<circle cx='" & ( _w - 4 ) & "' cy='" & _lastY & "' r='3.5' fill='%23F5A524'/>"
+			        & "</svg>"
+		displayFolder: Modern KPIs
+		lineageTag: 68344287-638e-4115-8407-0e400f6ef5f1
+		dataCategory: ImageUrl
+
+	measure 'Profit Sparkline' =
+			VAR _start = CALCULATE ( MIN ( financials[Date] ), ALL ( financials ) )
+			VAR _w = 240
+			VAR _h = 34
+			VAR _months =
+			    ADDCOLUMNS (
+			        GENERATESERIES ( 0, 15, 1 ),
+			        "@v",
+			            VAR _s = EDATE ( _start, [Value] )
+			            RETURN
+			                CALCULATE (
+			                    [Total Profit],
+			                    REMOVEFILTERS ( financials[Date], financials[Year], financials[Month Number], financials[Month Name], financials[Quarter], financials[Month Start], financials[Month Label] ),
+			                    financials[Date] = _s
+			                ) + 0
+			    )
+			VAR _min = MINX ( _months, [@v] )
+			VAR _max = MAXX ( _months, [@v] )
+			VAR _pts =
+			    CONCATENATEX (
+			        _months,
+			        FORMAT ( 4 + [Value] * ( _w - 8 ) / 15, "0" ) & ","
+			            & FORMAT ( _h - 6 - DIVIDE ( [@v] - _min, _max - _min ) * ( _h - 12 ), "0" ),
+			        " ",
+			        [Value], ASC
+			    )
+			VAR _lastY = FORMAT ( _h - 6 - DIVIDE ( MAXX ( FILTER ( _months, [Value] = 15 ), [@v] ) - _min, _max - _min ) * ( _h - 12 ), "0" )
+			RETURN
+			    "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='" & _w & "' height='" & _h & "'>"
+			        & "<polygon points='4," & _h & " " & _pts & " " & ( _w - 4 ) & "," & _h & "' fill='%230E7C86' fill-opacity='0.14'/>"
+			        & "<polyline points='" & _pts & "' fill='none' stroke='%230E7C86' stroke-width='2.5' stroke-linejoin='round' stroke-linecap='round'/>"
+			        & "<circle cx='" & ( _w - 4 ) & "' cy='" & _lastY & "' r='3.5' fill='%23F5A524'/>"
+			        & "</svg>"
+		displayFolder: Modern KPIs
+		lineageTag: 2dc68c51-9708-4d68-8e5d-542c60472a67
+		dataCategory: ImageUrl
+
+	measure 'Margin Sparkline' =
+			VAR _start = CALCULATE ( MIN ( financials[Date] ), ALL ( financials ) )
+			VAR _w = 240
+			VAR _h = 34
+			VAR _months =
+			    ADDCOLUMNS (
+			        GENERATESERIES ( 0, 15, 1 ),
+			        "@v",
+			            VAR _s = EDATE ( _start, [Value] )
+			            RETURN
+			                CALCULATE (
+			                    [Profit Margin],
+			                    REMOVEFILTERS ( financials[Date], financials[Year], financials[Month Number], financials[Month Name], financials[Quarter], financials[Month Start], financials[Month Label] ),
+			                    financials[Date] = _s
+			                ) + 0
+			    )
+			VAR _min = MINX ( _months, [@v] )
+			VAR _max = MAXX ( _months, [@v] )
+			VAR _pts =
+			    CONCATENATEX (
+			        _months,
+			        FORMAT ( 4 + [Value] * ( _w - 8 ) / 15, "0" ) & ","
+			            & FORMAT ( _h - 6 - DIVIDE ( [@v] - _min, _max - _min ) * ( _h - 12 ), "0" ),
+			        " ",
+			        [Value], ASC
+			    )
+			VAR _lastY = FORMAT ( _h - 6 - DIVIDE ( MAXX ( FILTER ( _months, [Value] = 15 ), [@v] ) - _min, _max - _min ) * ( _h - 12 ), "0" )
+			RETURN
+			    "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='" & _w & "' height='" & _h & "'>"
+			        & "<polygon points='4," & _h & " " & _pts & " " & ( _w - 4 ) & "," & _h & "' fill='%230E7C86' fill-opacity='0.14'/>"
+			        & "<polyline points='" & _pts & "' fill='none' stroke='%230E7C86' stroke-width='2.5' stroke-linejoin='round' stroke-linecap='round'/>"
+			        & "<circle cx='" & ( _w - 4 ) & "' cy='" & _lastY & "' r='3.5' fill='%23F5A524'/>"
+			        & "</svg>"
+		displayFolder: Modern KPIs
+		lineageTag: cc2fed6b-efdf-43bb-b844-04eac3f7eea3
+		dataCategory: ImageUrl
+
+	measure 'Units Sparkline' =
+			VAR _start = CALCULATE ( MIN ( financials[Date] ), ALL ( financials ) )
+			VAR _w = 240
+			VAR _h = 34
+			VAR _months =
+			    ADDCOLUMNS (
+			        GENERATESERIES ( 0, 15, 1 ),
+			        "@v",
+			            VAR _s = EDATE ( _start, [Value] )
+			            RETURN
+			                CALCULATE (
+			                    [Total Units],
+			                    REMOVEFILTERS ( financials[Date], financials[Year], financials[Month Number], financials[Month Name], financials[Quarter], financials[Month Start], financials[Month Label] ),
+			                    financials[Date] = _s
+			                ) + 0
+			    )
+			VAR _min = MINX ( _months, [@v] )
+			VAR _max = MAXX ( _months, [@v] )
+			VAR _pts =
+			    CONCATENATEX (
+			        _months,
+			        FORMAT ( 4 + [Value] * ( _w - 8 ) / 15, "0" ) & ","
+			            & FORMAT ( _h - 6 - DIVIDE ( [@v] - _min, _max - _min ) * ( _h - 12 ), "0" ),
+			        " ",
+			        [Value], ASC
+			    )
+			VAR _lastY = FORMAT ( _h - 6 - DIVIDE ( MAXX ( FILTER ( _months, [Value] = 15 ), [@v] ) - _min, _max - _min ) * ( _h - 12 ), "0" )
+			RETURN
+			    "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='" & _w & "' height='" & _h & "'>"
+			        & "<polygon points='4," & _h & " " & _pts & " " & ( _w - 4 ) & "," & _h & "' fill='%230E7C86' fill-opacity='0.14'/>"
+			        & "<polyline points='" & _pts & "' fill='none' stroke='%230E7C86' stroke-width='2.5' stroke-linejoin='round' stroke-linecap='round'/>"
+			        & "<circle cx='" & ( _w - 4 ) & "' cy='" & _lastY & "' r='3.5' fill='%23F5A524'/>"
+			        & "</svg>"
+		displayFolder: Modern KPIs
+		lineageTag: 3a4a40bd-9264-4324-b38a-4da4231c6ecd
+		dataCategory: ImageUrl
+
+	measure 'Sales $M' = DIVIDE([Total Sales], 1000000)
+		formatString: 0.0
+		displayFolder: Core
+		lineageTag: 2443c4d6-61d3-475a-a0ed-7c34a9b71ff7
+
+	measure 'Profit $M' = DIVIDE([Total Profit], 1000000)
+		formatString: 0.0;-0.0;0.0
+		displayFolder: Core
+		lineageTag: cb4e9192-e8f5-47ae-8ea8-0c885b0026a6
+
+	measure 'Country Count' = DISTINCTCOUNT(financials[Country])
+		formatString: 0
+		displayFolder: Core
+		lineageTag: 6b8a61f0-a5ae-4b68-b8f3-bf105627ebe3
+
+	measure 'Product Count' = DISTINCTCOUNT(financials[Product])
+		formatString: 0
+		displayFolder: Core
+		lineageTag: edf23bc0-12d3-426b-9d57-2a2b382a5ee0
+
+	measure 'Segment Count' = DISTINCTCOUNT(financials[Segment])
+		formatString: 0
+		displayFolder: Core
+		lineageTag: 441671b3-d84c-4dce-bab8-9008edf77604
+
+	measure 'Title Sales by Segment' = "Sales by Segment, " & [Period Label]
+		displayFolder: Report Titles
+		lineageTag: cae01bd9-0ff7-4fa9-abe3-f18df3a8cb4b
+
+	measure 'Title Country Strip' = "Sales by Country, " & [Period Label]
+		displayFolder: Report Titles
+		lineageTag: c10512f7-492e-40bc-a7e2-f50800e8fabb
+
+	measure 'Title Band Short' = "Margin by Discount Band, " & [Period Label]
+		displayFolder: Report Titles
+		lineageTag: 579cacbb-cb63-4ce2-90be-6b555d059694
+
+	measure 'Sales Strip $M' = DIVIDE([Total Sales], 1000000)
+		formatString: \$0.0\M
+		displayFolder: Core
+		lineageTag: ef49877f-7ca7-4e4e-8f51-c059dc73f6d0
+
+	measure 'Sales US' = CALCULATE([Sales Strip $M], financials[Country] = "United States of America")
+		formatString: \$0.0\M
+		displayFolder: Country Strip
+		lineageTag: b6ee6040-9f4f-49cb-9859-70e6a635e88c
+
+	measure 'Sales Canada' = CALCULATE([Sales Strip $M], financials[Country] = "Canada")
+		formatString: \$0.0\M
+		displayFolder: Country Strip
+		lineageTag: b3aecbe7-3641-4cd9-b10b-de4f982d8841
+
+	measure 'Sales France' = CALCULATE([Sales Strip $M], financials[Country] = "France")
+		formatString: \$0.0\M
+		displayFolder: Country Strip
+		lineageTag: 86e1a26d-096e-4906-aaf5-b9875f6d4124
+
+	measure 'Sales Germany' = CALCULATE([Sales Strip $M], financials[Country] = "Germany")
+		formatString: \$0.0\M
+		displayFolder: Country Strip
+		lineageTag: e0538650-0592-4aa3-b3b4-d73bda02e646
+
+	measure 'Sales Mexico' = CALCULATE([Sales Strip $M], financials[Country] = "Mexico")
+		formatString: \$0.0\M
+		displayFolder: Country Strip
+		lineageTag: 8818e08b-bafc-457a-b59a-58a88f7d789d
+
+	column Segment
+		dataType: string
+		lineageTag: c472c494-1cd2-4001-96e0-1de8668c1c2d
+		summarizeBy: none
+		sourceColumn: Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: c7fc402b-dad2-4a48-bb0d-21f2920fcdfd
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product
+		dataType: string
+		lineageTag: 54af0932-89e4-48a7-8db8-e18f56d16a9a
+		summarizeBy: none
+		sourceColumn: Product
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Discount Band'
+		dataType: string
+		lineageTag: 27210c3e-141f-4233-89a8-2b89299f67b6
+		summarizeBy: none
+		sourceColumn: Discount Band
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Units Sold'
+		dataType: double
+		lineageTag: 080ae75d-2f55-485f-94d1-b4b494499c6e
+		summarizeBy: sum
+		sourceColumn: Units Sold
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Manufacturing Price'
+		dataType: int64
+		formatString: 0
+		lineageTag: 9c20cce0-3252-4952-84af-91210d3e197a
+		summarizeBy: sum
+		sourceColumn: Manufacturing Price
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sale Price'
+		dataType: int64
+		formatString: 0
+		lineageTag: ad81c184-df02-47c0-95d2-15f585d505d2
+		summarizeBy: sum
+		sourceColumn: Sale Price
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Gross Sales'
+		dataType: double
+		lineageTag: 3795d90c-b54d-422f-9347-750d59230053
+		summarizeBy: sum
+		sourceColumn: Gross Sales
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Discounts
+		dataType: double
+		lineageTag: da916687-70c8-4886-9f1e-c3471bc8b2c1
+		summarizeBy: sum
+		sourceColumn: Discounts
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ' Sales'
+		dataType: double
+		lineageTag: 3b4ad75b-a764-4598-b23c-4ccf3ea8e981
+		summarizeBy: sum
+		sourceColumn: " Sales"
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COGS
+		dataType: double
+		lineageTag: a2ef2c66-8342-4fe6-bc3a-461c9bb26c3f
+		summarizeBy: sum
+		sourceColumn: COGS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Profit
+		dataType: double
+		lineageTag: 6727bf50-0e1f-488b-aff6-1c7830c60d18
+		summarizeBy: sum
+		sourceColumn: Profit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: feec5e3a-f75a-4507-bd8d-a7682911634c
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 0972e790-03e6-4a06-a2d6-8d9d68164b0c
+			defaultHierarchy: LocalDateTable_caf5c958-99cf-4f23-bd0f-37d66dc5dda6.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Month Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3827b85d-d30d-4a41-98a5-6c82b4c17afc
+		summarizeBy: sum
+		sourceColumn: Month Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name'
+		dataType: string
+		lineageTag: d128ca54-d4bb-403d-b024-2cfc486499e9
+		summarizeBy: none
+		sourceColumn: Month Name
+		sortByColumn: 'Month Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: afb1cb7e-03fe-4bdd-80b5-59b9cd0a0cbb
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: string
+		lineageTag: e1a045fe-5d86-41e2-8cf5-7631812ba66b
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Start' = DATE(financials[Year], financials[Month Number], 1)
+		dataType: dateTime
+		isHidden
+		formatString: mmm yyyy
+		lineageTag: 436c5254-3d3a-462a-b048-7c768fe5eb59
+		summarizeBy: none
+
+	column 'Month Label' = FORMAT(financials[Month Start], "mmm yy")
+		dataType: string
+		lineageTag: 80c554bf-25ce-4694-ad04-6d605d679138
+		summarizeBy: none
+		sortByColumn: 'Month Start'
+
+	column 'Band Order' = SWITCH(financials[Discount Band], "None", 1, "Low", 2, "Medium", 3, "High", 4, 9)
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 787039a7-fc07-4262-95a4-8630d2af0fbe
+		summarizeBy: none
+
+	column 'Discount Level' = financials[Discount Band]
+		dataType: string
+		lineageTag: 653c4d56-4023-4eab-85b5-f313c41cfd39
+		summarizeBy: none
+		sortByColumn: 'Band Order'
+
+	partition financials = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\hp\Data Science and AI\Courses_Data Accelerator_classes_Introduction to Data Visualization [Power BI]_resources_Sample Data (3) (1).xlsx"), null, true),
+				    financials_Table = Source{[Item="financials",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(financials_Table,{{"Segment", type text}, {"Country", type text}, {"Product", type text}, {"Discount Band", type text}, {"Units Sold", type number}, {"Manufacturing Price", Int64.Type}, {"Sale Price", Int64.Type}, {"Gross Sales", type number}, {"Discounts", type number}, {" Sales", type number}, {"COGS", type number}, {"Profit", type number}, {"Date", type date}, {"Month Number", Int64.Type}, {"Month Name", type text}, {"Year", Int64.Type}, {"Quarter", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

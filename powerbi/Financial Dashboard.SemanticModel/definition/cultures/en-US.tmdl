@@ -1,0 +1,263 @@
+cultureInfo en-US
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "financials.sales_us": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "financials",
+			          "ConceptualProperty": "Sales US"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "United States": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "financials.sales_canada": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "financials",
+			          "ConceptualProperty": "Sales Canada"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Canada": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "financials.sales_france": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "financials",
+			          "ConceptualProperty": "Sales France"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "France": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "financials.sales_germany": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "financials",
+			          "ConceptualProperty": "Sales Germany"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Germany": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "financials.sales_mexico": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "financials",
+			          "ConceptualProperty": "Sales Mexico"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Mexico": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "financials.total_units": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "financials",
+			          "ConceptualProperty": "Total Units"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Units Sold": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "financials.records": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "financials",
+			          "ConceptualProperty": "Records"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Transactions": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "financials.country_count": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "financials",
+			          "ConceptualProperty": "Country Count"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Countries": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "financials.product_count": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "financials",
+			          "ConceptualProperty": "Product Count"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Products": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "financials.segment_count": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "financials",
+			          "ConceptualProperty": "Segment Count"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Segments": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "financials.month_label": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "financials",
+			          "ConceptualProperty": "Month Label"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Month": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "financials.total_units_k": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "financials",
+			          "ConceptualProperty": "Total Units (K)"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Units Sold": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+
